@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Meal Suggestions</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #mealSuggestions {
+            text-align: left;
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        .dayContainer {
+            margin-top: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .backgroundImage {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Indian Meal Suggestions</h1>
+</header>
+
+<button onclick="suggestMeals()">Generate Meal Suggestions</button>
+
+<div id="mealSuggestions"></div>
+
+<script>
+    function suggest_meal(category) {
+        return category[Math.floor(Math.random() * category.length)];
+    }
+
+    function suggestMeals() {
+        const meat_foods = ['Chicken (breast)', 'Mutton (kapuras)', 'Fish (tuna)', 'Shell fish (royyalu/peethalu)', 'Eggs'];
+        const dairy_foods = ['Milk with Original honey and bournvita/boost/horlicks', 'Curd', 'Paneer', 'Butter', 'Clarified butter/ghee'];
+        const grains = ['Brown rice', 'Wheat flour', 'Ragulu', 'Sajjalu', 'Jonnalu', 'Samalu', 'Korralu', 'Arikelu', 'Oodalu', 'Andu korralu',
+                        'Varigelu', 'Barley', 'Oats', 'Quinoa'];
+        const pulses = ['Kandi pappu/erra(masoor) pappu', 'Pesara pappu', 'Minapa pappu', 'Senaga pappu/(white)', 'Bobbarlu/alasandala pappu',
+                        'Ulavalu', 'Mokka jonna', 'Red rajma', 'White rajma', 'Soya (feminizing)', 'Green peas'];
+        const fruits = ['Apples', 'Pomegranate', 'Grapes (red & black & green)', 'Albukhara (red plum)', 'Cherries', 'Cranberries',
+                        'Raspberries (red & black)', 'Strawberries', 'Watermelon', 'Black plum', 'Peach', 'Papaya', 'Sapota', 'Orange',
+                        'Mangoes', 'Gooseberry', 'Pineapple', 'Guava', 'Bananas', 'Custard fruit (seetaphal)', 'Jack fruit', 'Mosambi',
+                        'Pear', 'Avocado'];
+        const vegetables = ['Tomatoes', 'Vankayalu (feminizing)', 'Onions', 'Aloo', 'Drumsticks', 'Cabbage', 'Cauliflower', 'Bhindi',
+                            'Dondakaya', 'Gummadikaya/budida', 'Chikkudu kayalu', 'Goru chikkullu', 'Beetroot', 'Kakarakaya', 'Anapakaya',
+                            'Vankaya', 'Capsicum', 'Carrot', 'Dosakaya', 'Kanda/Chama dumpa', 'Mushrooms', 'Mullangi/erra',
+                            'Beerakaya/neti', 'Potlakaya', 'Chilakada dumpa', 'Palakura', 'Thotakura', 'Gongura', 'Mentikura',
+                            'Chukkakura', 'Bachalikura', 'Munagaku', 'Kotimeera', 'Pudina', 'Allam', 'Vellulli', 'Pachimirchi',
+                            'Karivepaku', 'Nimmakayalu'];
+
+        const days_of_week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+        let suggestionsHtml = '<h2>Meal Suggestions</h2>';
+        
+        days_of_week.forEach(day => {
+            const breakfast = suggest_meal([suggest_meal(grains), suggest_meal(dairy_foods), suggest_meal(fruits)]);
+            const lunch = suggest_meal([suggest_meal(meat_foods), suggest_meal(pulses), suggest_meal(vegetables)]);
+            const dinner = suggest_meal([suggest_meal(meat_foods), suggest_meal(grains), suggest_meal(vegetables)]);
+
+            suggestionsHtml += `<div class="dayContainer">`;
+            suggestionsHtml += `<h3>${day}</h3>`;
+            suggestionsHtml += `<p><strong>Breakfast:</strong> ${breakfast}</p>`;
+            suggestionsHtml += `<p><strong>Lunch:</strong> ${lunch}</p>`;
+            suggestionsHtml += `<p><strong>Dinner:</strong> ${dinner}</p>`;
+            suggestionsHtml += `</div>`;
+        });
+
+        document.getElementById('mealSuggestions').innerHTML = suggestionsHtml;
+    }
+</script>
+
+<!-- Background images for illustration -->
+<img class="backgroundImage" src="https://www.uofmhealth.org/sites/default/files/culinary-medicine.jpg" alt="Indian Food Image">
+<img class="backgroundImage" src="https://c.ndtvimg.com/2022-05/lktbe7no_dinner-indian-food_625x300_11_May_22.jpg?im=FeatureCrop,algorithm=dnn,width=620,height=350" alt="Indian Food Image">
+
+</body>
+</html>
